@@ -307,3 +307,128 @@ def taking_input_in_label_dictionary(key,label_name_dictionary,data):
     
     label_name_dictionary[key]=value
 # -----------------------------------------------------Satkeerat Singh end--------------------------------------------
+
+# -------------------------------------------------Sarthak Srivastav start--------------------------------------
+
+# ----------------------extra function(used in satwik's function IGNORE IT) ----------------------------------------------------------------------
+def key(instruction):
+    all_isa=["add","sub","mov","ld","st","mul","div","rs","ls","xor","or","and","not","cmp","jmp","jlt","jgt","je","hlt"]
+    for i in range(1,len(instruction)):
+        if(instruction[i] not in all_isa):
+            key=i
+    return key
+
+
+
+# -------------------------------------ISA(called function)----------------
+def addition(r1, r2, r3):
+    if r1 in reg_lst and r2 in reg_lst and r3 in reg_lst:
+        return "00000_00_"+register(r1)+"_"+register(r2)+"_"+register(r3)
+
+def subtraction(r1, r2, r3):
+    if r1 in reg_lst and r2 in reg_lst and r3 in reg_lst:
+        return "00001_00_"+register(r1)+"_"+register(r2)+"_"+register(r3)
+
+def move_immediate(r, imm_val):
+    # print("                   hi                           ")
+    # print("imm value",imm_val[1:])
+    # print("imm_val binary",integer_to_binary_with_padding(imm_val[1:]))
+    
+    if r in reg_lst:
+        return "00010_0_"+register(r)+"_"+integer_to_binary_with_padding(imm_val[1:])
+
+
+
+def move_register(r1, r2):
+    # print("              ",r2)
+    if r1 in reg_lst and r2 in reg_lst:
+        return "00011_00000_"+register(r1)+"_"+register(r2)
+
+def load(r,var, var_dic):
+    return "00100_0_"+register(r)+"_"+var_dic[var]
+
+def store(r,var,var_dic):
+    return "00101_0_"+register(r)+"_"+var_dic[var]
+
+def multiply(r1,r2,r3):
+    
+    return "00110_00_"+register(r1)+"_"+register(r2)+"_"+register(r3)
+
+
+
+def divide(r1,r2):
+    return "00111_00000_"+register(r1)+"_"+register(r2)
+
+def right_shift(r1,imm):
+    
+    return "01000_0_"+register(r1)+"_"+integer_to_binary_with_padding(imm)
+
+
+
+def left_shift(r1,imm):
+    
+    return "01001_0_"+register(r1)+"_"+integer_to_binary_with_padding(imm)
+
+
+
+def exclusive_OR(r1,r2,r3):
+    if r1 in reg_lst and r2 in reg_lst and r3 in reg_lst:
+        return "01010_00_"+register(r1)+register(r2)+register(r3)
+
+
+
+def Or(r1,r2,r3):
+    if r1 in reg_lst and r2 in reg_lst and r3 in reg_lst:
+        return "01011_00_"+register(r1)+register(r2)+register(r3)
+
+
+
+def And(r1,r2,r3):
+     if r1 in reg_lst and r2 in reg_lst and r3 in reg_lst:
+        return "01100_00_"+register(r1)+register(r2)+register(r3)
+
+
+def invert(r1,r2):
+    if r1 in reg_lst and r2 in reg_lst:
+        return "01101_00000_"+register(r1)+register(r2)
+
+
+def compare(r1,r2):
+    # print("             r1",r1)
+    # print("             r2",r2)
+    if r1 in reg_lst and r2 in reg_lst:
+        return "01110_00000_"+register(r1)+register(r2)
+
+
+def unconditional_jump(instruction,label_name_dictionary,data):
+    k=key(instruction)
+    taking_input_in_label_dictionary(instruction[k],label_name_dictionary,data)
+    return "01111_0000_"+label_name_dictionary[instruction[k]]
+
+
+def jump_if_less_than(instruction,label_name_dictionary,data):
+    k=key(instruction)
+    taking_input_in_label_dictionary(instruction[k],label_name_dictionary,data)
+    return "11100_0000_"+label_name_dictionary[instruction[k]]
+
+
+
+def jump_if_greater_than(instruction,label_name_dictionary,data):
+    k=key(instruction)
+    taking_input_in_label_dictionary(instruction[k],label_name_dictionary,data)
+    return "11101_0000_"+label_name_dictionary[instruction[k]]
+
+
+
+def jump_if_equal(instruction,label_name_dictionary,data):
+    k=key(instruction)
+    taking_input_in_label_dictionary(instruction[k],label_name_dictionary,data)
+    return "11111_0000_"+label_name_dictionary[instruction[k]]
+
+
+
+def halt():
+    return "11010_00000000000"
+
+
+# -------------------------------------------------Sarthak Srivastav end---------------------------------------------
