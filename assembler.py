@@ -432,3 +432,175 @@ def halt():
 
 
 # -------------------------------------------------Sarthak Srivastav end---------------------------------------------
+# ----------------------------------------------------Saarthak Saxena start---------------------------------
+# -------------------------calling all the different functions-----------
+def calling_other_functions(data,no_of_lines,label_name_dictionary,var_dic):
+    f1=open("output.txt","w")
+    for i in data:
+        # print(i)
+        if(i[0]=="add"):
+            st=addition(i[1], i[2], i[3])
+            f1.write(st)
+            print(addition(i[1], i[2], i[3]))
+            f1.write("\n")
+        elif(i[0]=="sub"):
+            f1.write(subtraction(i[1], i[2], i[3]))
+            print(subtraction(i[1], i[2], i[3]))
+            f1.write("\n")
+        elif(i[0]=="mov" and (i[2])[0]=="$"):
+            f1.write(move_immediate(i[1], i[2]))
+            print(move_immediate(i[1], i[2]))
+            f1.write("\n")
+        elif(i[0]=="mov" and ((i[2])[:1]=="R" or (i[2])[:1]=="F")):
+            f1.write(move_register(i[1], i[2]))
+            print(move_register(i[1], i[2]))
+            f1.write("\n")
+        elif(i[0]=="ld"):
+            f1.write(load(i[1],i[2],var_dic))
+            print(load(i[1],i[2],var_dic))
+            f1.write("\n")
+        elif(i[0]=="st"):
+            f1.write(store(i[1],i[2],var_dic))
+            print(store(i[1],i[2],var_dic))
+            f1.write("\n")
+        elif(i[0]=="mul"):
+            f1.write(multiply(i[1],i[2],i[3]))
+            print(multiply(i[1],i[2],i[3]))
+            f1.write("\n")
+        elif(i[0]=="div"):
+            f1.write(divide(i[1],i[2]))
+            print(divide(i[1],i[2]))
+            f1.write("\n")
+        elif(i[0]=="rs"):
+            f1.write(right_shift(i[1],i[2][1:]))
+            print(right_shift(i[1],i[2][1:]))
+            f1.write("\n")
+        elif(i[0]=="ls"):
+            f1.write(left_shift(i[1],i[2][1:]))
+            print(left_shift(i[1],i[2][1:]))
+            f1.write("\n")
+        elif(i[0]=="xor"):
+            f1.write(exclusive_OR(i[1], i[2], i[3]))
+            print(exclusive_OR(i[1], i[2], i[3]))
+            f1.write("\n")
+        elif(i[0]=="or"):
+            f1.write(Or(i[1], i[2], i[3]))
+            print(Or(i[1], i[2], i[3]))
+            f1.write("\n")
+        elif(i[0]=="and"):
+            f1.write(And(i[1], i[2], i[3]))
+            print(And(i[1], i[2], i[3]))
+            f1.write("\n")
+        elif(i[0]=="not"):
+            f1.write(invert(i[1], i[2]))
+            print(invert(i[1], i[2]))
+            f1.write("\n")
+        elif(i[0]=="cmp"):
+            f1.write(compare(i[1], i[2]))
+            print(compare(i[1], i[2]))
+            f1.write("\n")
+        elif(i[0]=="jmp"):
+            f1.write(unconditional_jump(i,label_name_dictionary,data))
+            print(unconditional_jump(i,label_name_dictionary,data))
+            f1.write("\n")
+        elif(i[0]=="jlt"):
+            f1.write(jump_if_less_than(i,label_name_dictionary,data))
+            print(jump_if_less_than(i,label_name_dictionary,data))
+            f1.write("\n")
+        elif(i[0]=="jgt"):
+            f1.write(jump_if_greater_than(i,label_name_dictionary,data))
+            print(jump_if_greater_than(i,label_name_dictionary,data))
+            f1.write("\n")
+        elif(i[0]=="je"):
+            f1.write(jump_if_equal(i,label_name_dictionary,data))
+            print(jump_if_equal(i,label_name_dictionary,data))
+            f1.write("\n")
+        elif(i[0]=="hlt"):
+            f1.write(halt())
+            print(halt())
+            f1.write("\n")
+        else: 
+            if(i[1]=="add"):
+                f1.write(addition(i[2], i[3], i[4]))
+                print(addition(i[2], i[3], i[4]))
+                f1.write("\n")
+            elif(i[1]=="sub"):
+                f1.write(subtraction(i[2], i[3], i[4]))
+                print(subtraction(i[2], i[3], i[4]))
+                f1.write("\n")
+            elif(i[1]=="mov" and (i[3])[0]=="$"):
+                # print("                    mie                          ")
+                f1.write(move_immediate(i[2], i[3]))
+                print(move_immediate(i[2], i[3]))
+                f1.write("\n")
+            elif(i[1]=="mov" and (i[2])[:1]=="R"):
+                f1.write(move_register(i[2], i[3]))
+                print(move_register(i[2], i[3]))
+                f1.write("\n")
+            elif(i[1]=="ld"):
+                f1.write(load(i[2],i[3],var_dic))
+                print(load(i[2],i[3],var_dic))
+                f1.write("\n")
+            elif(i[1]=="st"):
+                f1.write(store(i[2],i[3],var_dic))
+                print(store(i[2],i[3],var_dic))
+                f1.write("\n")
+            elif(i[1]=="mul"):
+                f1.write(multiply(i[2],i[3],i[4]))
+                print(multiply(i[2],i[3],i[4]))
+                f1.write("\n")
+            elif(i[1]=="div"):
+                f1.write(divide(i[2],i[3]))
+                print(divide(i[2],i[3]))
+                f1.write("\n")
+            elif(i[1]=="rs"):
+                f1.write(right_shift(i[2],i[3][1:]))
+                print(right_shift(i[2],i[3][1:]))
+                f1.write("\n")
+            elif(i[1]=="ls"):
+                f1.write(left_shift(i[2],i[3][1:]))
+                print(left_shift(i[2],i[3][1:]))
+                f1.write("\n")
+            elif(i[1]=="xor"):
+                f1.write(exclusive_OR(i[2], i[3], i[4]))
+                print(exclusive_OR(i[2], i[3], i[4]))
+                f1.write("\n")
+            elif(i[1]=="or"):
+                f1.write(Or(i[2], i[3], i[4]))
+                print(Or(i[2], i[3], i[4]))
+                f1.write("\n")
+            elif(i[1]=="and"):
+                f1.write(And(i[2], i[3], i[4]))
+                print(And(i[2], i[3], i[4]))
+                f1.write("\n")
+            elif(i[1]=="not"):
+                f1.write(invert(i[2], i[3]))
+                print(invert(i[2], i[3]))
+                f1.write("\n")
+            elif(i[1]=="cmp"):
+                f1.write(compare(i[2], i[3]))
+                print(compare(i[2], i[3]))
+                f1.write("\n")
+            elif(i[1]=="jmp"):
+                f1.write(unconditional_jump(i,label_name_dictionary,data))
+                print(unconditional_jump(i,label_name_dictionary,data))
+                f1.write("\n")
+            elif(i[1]=="jlt"):
+                f1.write(jump_if_less_than(i,label_name_dictionary,data))
+                print(jump_if_less_than(i,label_name_dictionary,data))
+                f1.write("\n")
+            elif(i[1]=="jgt"):
+                f1.write(jump_if_greater_than(i,label_name_dictionary,data))
+                print(jump_if_greater_than(i,label_name_dictionary,data))
+                f1.write("\n")
+            elif(i[1]=="je"):
+                f1.write(jump_if_equal(i,label_name_dictionary,data))
+                print(jump_if_equal(i,label_name_dictionary,data))
+                f1.write("\n")
+            elif(i[1]=="hlt"):
+                f1.write(halt())
+                print(halt())
+                f1.write("\n")
+    f1.close()
+#------------------------------------Saarthak Saxena end-----------------------------------------------
+
