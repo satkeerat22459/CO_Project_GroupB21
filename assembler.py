@@ -634,3 +634,12 @@ def calling_other_functions(data,no_of_lines,label_name_dictionary,var_dic):
                 # f1.write("\n")
     # f1.close()
 #------------------------------------Saarthak Saxena end-----------------------------------------------
+# --------------------------------Sarthak Srivastav start-----------------------------------
+def main():
+    label_name_dictionary={}
+    data , no_of_lines,var_dic,data_for_error_function_dic,data_for_error_function_list=inpu()#here data doesn't contain "var" list
+    error(data_for_error_function_dic,data_for_error_function_list)
+    calling_other_functions(data,no_of_lines,label_name_dictionary,var_dic)
+if __name__ == "__main__":
+    main()
+# -----------------------------------Sarthak Srivastav end----------------------------------------------------
