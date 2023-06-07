@@ -1,4 +1,154 @@
+# -------------------------------------------satwik starts----------------------------------------------------------
+# ---------------------------------------------variable declaration--------------------------------------------------
+R0=0
+R1=0
+R2=0
+R3=0
+R4=0
+R5=0
+R6=0
+FLAGS="0000000000000000"
+# ----------------------------------integer_to_binary_with_padding for registers 16 bits(used in satwik's funtion)----------------------
+def integer_to_binary_with_padding(value):
+    binary_number=format(int(value),'b')
+    return str(binary_number).rjust(16,'0')
 
+
+def integer_to_binary_with_padding_for_dictionary(value):
+# ----------------------------------integer_to_binary_with_padding for dictionary 7 bits(used in satwik's funtion)----------------------
+    binary_number=format(int(value),'b')
+    return str(str(binary_number).rjust(7,'0'))
+
+
+
+
+
+def assigning_value_in_global_var(s,x):
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    # print("-------------assigning--------------")
+    # print("x",x)
+    # print("s",s)
+    
+    # global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    if(s=="000"):
+        R0=x
+    elif(s=="001"):
+        # print("hi")
+        R1=x
+    elif(s=="010"):
+        R2=x
+    elif(s=="011"):
+        R3=x
+    elif(s=="100"):
+        R4=x
+    elif(s=="101"):
+        R5=x
+    elif(s=="110"):
+        R6=x
+    # print("R0",R0)
+    # print("R1",R1)
+    # print("R2",R2)
+    # print("R3",R3)
+    # print("R4",R4)
+    # print("R5",R5)
+    # print("R6",R6)
+    # print("FLAGS",FLAGS)
+    # print("R1",R1)
+#     reg_dic={"000": R0,"001":R1,"010":R2,"011":R3,"100":R4,"101":R5,"110":R6,"111":FLAGS}
+
+# # ------------------------------------------register dictionary for accessing the value of the registers-------------------------
+# reg_dic={"000": R0,"001":R1,"010":R2,"011":R3,"100":R4,"101":R5,"110":R6,"111":FLAGS}
+
+def reg_dic(s):
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    # print("---------reg_dic---------------")
+    # print("R0",R0)
+    # print("R1",R1)
+    # print("R2",R2)
+    # print("R3",R3)
+    # print("R4",R4)
+    # print("R5",R5)
+    # print("R6",R6)
+    # print("FLAGS",FLAGS)
+    if(s=="000"):
+        return R0
+    elif(s=="001"):
+        return R1
+    elif(s=="010"):
+        return R2
+    elif(s=="011"):
+        return R3
+    elif(s=="100"):
+        return R4
+    elif(s=="101"):
+        return R5
+    elif(s=="110"):
+        return R6
+    elif(s=="111"):
+        return FLAGS
+
+counter=0
+
+def print_output(x,c):
+    # ---------------------------use to print (<PC (7 bits)><space><R0 (16 bits)><space>...<R6 (16 bits)><space><FLAGS (16 bits)>.)--------------------------------
+    # ---------------------------with instruction(i) as argument x-------------------------------------------------------
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0,counter
+    # print("-------------print_output--------------")
+    # print("R0",R0)
+    # print("R1",R1)
+    # print("R2",R2)
+    # print("R3",R3)
+    # print("R4",R4)
+    # print("R5",R5)
+    # print("R6",R6)
+    # print("FLAGS",FLAGS)
+    # print("x",x)
+    # for i in data_dic:
+    #     print("dic",data_dic[i])
+    #     if(data_dic[i]==x):
+    #         key=i
+    # print("key",key)
+    # if(counter<=len(data_dic)):
+    print(str(integer_to_binary_with_padding_for_dictionary(c))+"        "+integer_to_binary_with_padding(R0),integer_to_binary_with_padding(R1),integer_to_binary_with_padding(R2),integer_to_binary_with_padding(R3),integer_to_binary_with_padding(R4),integer_to_binary_with_padding(R5),integer_to_binary_with_padding(R6),FLAGS)
+        # counter+=1
+    # print()
+    # print()
+
+
+
+
+# ---------------------------------the value of all register is in integer except for FLAGS register--------------------------------r
+# --------------------------------- I have made all the register variables as global variable so use the same name as global variable(i.e. R0,R1,R3.......FLAGS) for assigning the value to the registers -------------------- 
+# ---------------------------------data_dic is the global dictionay with key as program counter and value as instruction-------------------
+# ---------------------------------data_list is the global list with the instruction----------------------------------------------
+# ---------------------------------use print_output function only for printing the output----------------------------------
+# ------------------------------------pass i as parameter in print_output function---------------------------
+# ------------------------------------i is the instruction code in all the ISA function given below----------------------------
+# -----------------------------------just run the program and u will understand it--------------------------------
+
+
+
+
+
+# -------------------------------------------write your code in the given function--------------------------------
+def add(i,c):
+    # print("add")
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    reg1 = reg_dic(str(i[7:10]))
+    reg2 = reg_dic(str(i[10:13]))
+    reg3 = reg_dic(str(i[13:]))
+    reg1 = reg2 + reg3
+    if(reg1<0 or reg1>127):
+        FLAGS="0000000000001000"
+        reg1=0
+        assigning_value_in_global_var(i[7:10],reg1)
+    else:
+        assigning_value_in_global_var(i[7:10],reg1)
+        FLAGS="0000000000000000"
+    # print(reg1)
+    print_output(i,c)
+
+# -------------------------------------------satwik ends---------------------------------------------------------
 # -------------------------------------------Sarthak srivastav starts--------------------------------------------
 def sub(i,c):
     # print("sub")
