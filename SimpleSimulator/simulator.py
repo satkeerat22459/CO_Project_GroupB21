@@ -268,3 +268,154 @@ def halt(i,c):
         print(i)
 
 # -------------------------------------------Saarthak saxena ends------------------------------------------------------------
+# -------------------------------------------Satkeerat Singh starts------------------------------------------------------------
+
+def addf(i,c):
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    reg2=reg_dic(i[10:13])
+    reg3=reg_dic(i[13:])
+    reg1=reg2+reg3
+    if(reg1<0 or reg1>127):
+        FLAGS="0000000000001000"
+        reg1=0
+        assigning_value_in_global_var(i[7:10],reg1)
+    else:
+        assigning_value_in_global_var(i[7:10],reg1)
+        FLAGS="0000000000000000"
+    print_output(i,c)
+
+def subf(i,c):
+    global FLAGS,R1,R2,R3,R4,R5,R6,R0
+    reg2=reg_dic(i[10:13])
+    reg3=reg_dic(i[13:])
+    reg1=reg2-reg3
+    if(reg3>reg2):
+        FLAGS="0000000000001000"
+        reg1=0
+        assigning_value_in_global_var(i[7:10],reg1)
+    else:
+        assigning_value_in_global_var(i[7:10],reg1)
+        FLAGS="0000000000000000"
+    print_output(i,c)
+
+# def movf(i):
+#     reg1=
+
+
+
+def call_other_function(data_dic,data_list):
+    c=0
+    k=0
+    # ----------------------------------function used for calling other functions------------------
+    # for i in range(0,len(data_dic),1):
+        # print(i)
+    while(k<100 and c<len(data_dic)):
+        # print(c)
+        # print((integer_to_binary_with_padding_for_dictionary(c)))
+        if(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00000"):
+            (add(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00001"):
+            # print(c)
+            # print(data_dic[integer_to_binary_with_padding_for_dictionary(c)])
+            (sub(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00010"):
+            (mov_imm(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00011"):
+            (mov_reg(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00100"):
+            (load(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00101"):
+            (store(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00110"):
+            (multiply(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="00111"):
+            (divide(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01000"):
+            (right_shift(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01001"):
+            (left_shift(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01010"):
+            (exclusive_OR(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01011"):
+            (OR(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01100"):
+            (AND(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01101"):
+            (invert(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01110"):
+            compare(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c)
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="01111"):
+            c=int(unconditional_jump(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+            # print(("c",c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="11100"):
+            c=int(jump_if_less_than(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+            # print(("c",c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="11101"):
+            c=int(jump_if_greater_than(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+            # print(("c",c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="11111"):
+            c=int(jump_if_equal(data_dic[integer_to_binary_with_padding_for_dictionary(c)],c))
+            # print(("c",c))
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="10000"):
+            # print(print_output(data_dic[integer_to_binary_with_padding_for_dictionary(c)]))
+            addf((data_dic[integer_to_binary_with_padding_for_dictionary(c)]),c)
+            
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="10001"):
+            # print(print_output(data_dic[integer_to_binary_with_padding_for_dictionary(c)]))
+            subf((data_dic[integer_to_binary_with_padding_for_dictionary(c)]),c)
+            
+        # elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="10010"):
+        #     # print(print_output(data_dic[integer_to_binary_with_padding_for_dictionary(c)]))
+        #     movf((data_dic[integer_to_binary_with_padding_for_dictionary(c)]))
+            
+        elif(data_dic[integer_to_binary_with_padding_for_dictionary(c)][:5]=="11010"):
+            # print(print_output(data_dic[integer_to_binary_with_padding_for_dictionary(c)]))
+            halt((data_dic[integer_to_binary_with_padding_for_dictionary(c)]),c)
+            quit()
+        
+        c+=1
+        k+=1
+        
+        
+
+# --------------------------------main function---------------------------------------
+# ---------------------------------taking input------------------------------------------------
+data_list=[]
+# print("HI")
+while True:
+    try:
+        testline=input()
+        data_list.append(testline)
+        # print(data_list)
+    except EOFError:
+        break
+# for i in range(0,7,1):
+#     inp=input()
+#     data_list.append(inp)
+    # print(data_list)
+data_dic={}
+# dictionary with key as binary 7bit number(counter) and value as opcode
+
+k=0
+for i in data_list:
+    data_dic[str(format(k,'b').rjust(7,'0'))]=i 
+    k+=1
+
+# print(data_dic)
+
+mem_dump=[]
+for i in data_list:
+    mem_dump.append(i)
+    # print(mem_dump)
+
+for i in range(len(data_list),128,1):
+    mem_dump.append(integer_to_binary_with_padding(0))
+# print(len(mem_dump))    
+
+# ------------------------------------just print these two and u will understand the input data-------------------
+# print("data_dic    ",data_dic)
+# print("data_list    ",data_list)
+
+call_other_function(data_dic, data_list)
+
+#--------------------------------------------------Satkeerat Singh ends -------------------------------------------------
