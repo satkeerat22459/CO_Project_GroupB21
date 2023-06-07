@@ -98,6 +98,13 @@ def error(data_for_error_function_dic,data_for_error_function_list):
     # print()
     # print("label list",label_list)
     # print()
+    # -----------------------------------------more bits in mov-------------------------------
+    for i in data_for_error_function_list:
+        if(i[0]=="mov" and i[2][0]=="$"):
+            if(int(i[2][1:])>127):
+                print("Illegal Immediate values (more than 7 bits)")
+                print("line no ",data_for_error_function_list.index(i))
+                quit()
     # -----------------------------------------------------$ in ls and rs------------------------------------------------------
     for i in data_for_error_function_list:
         if(i[0]=="ls" or i[0]=="rs"):
@@ -232,6 +239,7 @@ def error(data_for_error_function_dic,data_for_error_function_list):
 
 # ---------------------------------------------          E                ---------------------------------------
     for i in data_for_error_function_list:
+        #print(i[0])
         if(i[0] in register_dollar):
             if(int(i[2][1:])>128):
                 print("Illegal Immediate values (more than 7 bits)")
@@ -339,7 +347,6 @@ def taking_input_in_label_dictionary(key,label_name_dictionary,data):
     
     label_name_dictionary[key]=value
 # -----------------------------------------------------Satkeerat Singh end--------------------------------------------
-
 # -------------------------------------------------Sarthak Srivastav start--------------------------------------
 
 # ----------------------extra function(used in satwik's function IGNORE IT) ----------------------------------------------------------------------
@@ -635,7 +642,6 @@ def calling_other_functions(data,no_of_lines,label_name_dictionary,var_dic):
                 # f1.write("\n")
     # f1.close()
 #------------------------------------Saarthak Saxena end-----------------------------------------------
-
 # --------------------------------Sarthak Srivastav start-----------------------------------
 def main():
     label_name_dictionary={}
