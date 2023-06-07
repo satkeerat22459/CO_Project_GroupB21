@@ -20,7 +20,13 @@ def integer_to_binary_with_padding_for_dictionary(value):
     return str(str(binary_number).rjust(7,'0'))
 
 
-
+def mem_dum():
+    for i in range(0,len(mem_dump),1):
+        if(i==len(mem_dump)):
+            print(mem_dump[i],end="")
+       	else:
+       	    print(mem_dump[i])
+    
 
 
 def assigning_value_in_global_var(s,x):
@@ -86,6 +92,8 @@ def reg_dic(s):
         return R6
     elif(s=="111"):
         return FLAGS
+    else:
+    	return 0
 
 counter=0
 
@@ -137,7 +145,7 @@ def add(i,c):
     reg1 = reg_dic(str(i[7:10]))
     reg2 = reg_dic(str(i[10:13]))
     reg3 = reg_dic(str(i[13:]))
-    reg1 = reg2 + reg3
+    reg1 = int(reg2) + int(reg3)
     if(reg1<0 or reg1>127):
         FLAGS="0000000000001000"
         reg1=0
@@ -149,14 +157,14 @@ def add(i,c):
     print_output(i,c)
 
 # -------------------------------------------satwik ends---------------------------------------------------------
-# -------------------------------------------Sarthak srivastav starts--------------------------------------------
+# -------------------------------------------Sarthak strivatav starts--------------------------------------------
 def sub(i,c):
     # print("sub")
     global FLAGS,R1,R2,R3,R4,R5,R6,R0
     reg1 = reg_dic(str(i[7:10]))
     reg2 = reg_dic(str(i[10:13]))
     reg3 = reg_dic(str(i[13:]))
-    reg1 = reg2 - reg3
+    reg1 = int(reg2) - int(reg3)
     if(reg1<0 or reg1>127):
         FLAGS="0000000000001000"
         reg1=0
@@ -198,7 +206,7 @@ def load(i,c):
     global FLAGS,R1,R2,R3,R4,R5,R6,R0
     reg = reg_dic(str(i[6:9]))
     mem_addr = int(i[9:],2)
-    reg=mem_dump[mem_addr]
+    reg=int(mem_dump[mem_addr],2)
     assigning_value_in_global_var(str(i[6:9]), reg)
     FLAGS="0000000000000000"
     print_output(i,c)
@@ -209,7 +217,7 @@ def store(i,c):
     reg = reg_dic(str(i[6:9]))
     mem_addr = int(i[9:],2)
     mem_dump[mem_addr]=integer_to_binary_with_padding(reg)
-    assigning_value_in_global_var(str(i[6:9]), reg)
+    #assigning_value_in_global_var(str(i[6:9]), reg)
     FLAGS="0000000000000000"
     print_output(i,c)
     # print("store")
@@ -237,8 +245,8 @@ def divide(i,c):
         assigning_value_in_global_var("000", reg0)
         assigning_value_in_global_var("001", reg1)
     else:
-        reg0=reg_dic(i[10:13])//reg_dic(i[13:])
-        reg1=reg_dic(i[10:13])%reg_dic(i[13:])
+        reg0=int(reg_dic(i[10:13]))//int(reg_dic(i[13:]))
+        reg1=int(reg_dic(i[10:13]))%int(reg_dic(i[13:]))
         assigning_value_in_global_var("000", reg0)
         assigning_value_in_global_var("001", reg1)
         FLAGS="0000000000000000"
@@ -277,7 +285,7 @@ def left_shift(i,c):
 
     # print(i)
 
-# -------------------------------------------Sarthak srivastav ends------------------------------------------------------------
+# -------------------------------------------Sarthak strivatav ends------------------------------------------------------------
 # -------------------------------------------Saarthak saxena starts------------------------------------------------------------
 def exclusive_OR(i,c):
     # print("exculsive or")
@@ -285,7 +293,7 @@ def exclusive_OR(i,c):
     # reg1=reg_dic[i[7:10]]
     reg2=reg_dic(i[10:13])
     reg3=reg_dic(i[13:])
-    reg1=reg2^reg3
+    reg1=int(reg2)^int(reg3)
     assigning_value_in_global_var(i[7:10],reg1)
     FLAGS="0000000000000000"
     print_output(i,c)
@@ -297,7 +305,7 @@ def OR(i,c):
     # reg1=reg_dic[i[7:10]]
     reg2=reg_dic(i[10:13])
     reg3=reg_dic(i[13:])
-    reg1= reg2|reg3
+    reg1= int(reg2)|int(reg3)
     assigning_value_in_global_var(i[7:10],reg1)
     FLAGS="0000000000000000"
     print_output(i,c)
@@ -413,12 +421,12 @@ def halt(i,c):
     global FLAGS,R1,R2,R3,R4,R5,R6,R0
     FLAGS="0000000000000000"
     print_output(i,c)
+    mem_dum()
     # print(mem_dump)
-    for i in mem_dump:
-        print(i)
+    
 
 # -------------------------------------------Saarthak saxena ends------------------------------------------------------------
-# -------------------------------------------Satkeerat Singh starts------------------------------------------------------------
+# -------------------------------------------Satkeerat starts------------------------------------------------------------
 
 def addf(i,c):
     global FLAGS,R1,R2,R3,R4,R5,R6,R0
@@ -568,4 +576,4 @@ for i in range(len(data_list),128,1):
 
 call_other_function(data_dic, data_list)
 
-#--------------------------------------------------Satkeerat Singh ends -------------------------------------------------
+#--------------------------------------------------Satkeerat ends -------------------------------------------------
